@@ -32,31 +32,27 @@ export const addThousandsSeparator = (num) => {
         : formattedInteger;
 };
 
+// export const prepareExpenseBarChartData = (data = []) => {
+//     const chartData = data.map((item) => ({
+//         category: item?.category,
+//         amount: item?.amount,
+//     }));
+
+//     return chartData ; 
+// }; 
+
+
 export const prepareExpenseBarChartData = (data = []) => {
     const chartData = data.map((item) => ({
         category: item?.category,
         amount: item?.amount,
+        month: moment(item?.date).format("Do MMM"), // e.g., "Jul 8"
     }));
 
-    return chartData ; 
-}; 
+    return chartData;
+};
 
 
-// utils/helper.js
-
-// Adds 'month' for x-axis (required by chart)
-// export const prepareExpenseBarChartData = (data = []) => {
-//     return data.map((item) => {
-//         const dateObj = new Date(item.date);
-//         const month = dateObj.toLocaleString('default', { month: 'short' }); // e.g. "Jun"
-
-//         return {
-//             month,
-//             category: item?.category || 'Unknown',
-//             amount: Number(item?.amount) || 0,
-//         };
-//     });
-// };
 
 
 // export const prepareIncomeBarChartData = (data = []) => {

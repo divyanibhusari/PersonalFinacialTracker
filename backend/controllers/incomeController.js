@@ -1,4 +1,6 @@
-import xlsx from "xlsx";
+import XLSX from "xlsx";
+import path from "path";
+import fs from "fs";
 import Income from "../models/Income.js";
 
 // add income source
@@ -44,25 +46,45 @@ let downloadIncomeExcel = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const income = await Income.find({ userId }).sort({ Date: -1 }); // Capital "D"
+        const income = await Income.find({ userId }).sort({ date: -1 });
 
-        // Prepare date for each 
         const data = income.map((item) => ({
-            Source: item.source,
-            Amount: item.account,
-            Date: item.Date,
+            Source: item.source || "",
+            Amount: item.amount || 0,
+            Date: item.date ? new Date(item.date).toLocaleDateString() : "",
         }));
+        console.log("Formatted CSV data:", data); // ✅ DEBUG
+        
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Income");
 
-        const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(data);
-        xlsx.utils.book_append_sheet(wb, ws, "Income");
-        xlsx.writeFile(wb, 'income_details.xlsx');
-        res.download('income_details.xlsx');
+        // ✅ Ensure public folder exists
+        const publicDir = path.join(path.resolve(), "public");
+        if (!fs.existsSync(publicDir)) {
+            fs.mkdirSync(publicDir);
+        }
 
+        const filePath = path.join(publicDir, "income_details.csv");
+
+        // ✅ Write the file
+        XLSX.writeFile(wb, filePath, { bookType: "csv" });
+
+        // ✅ Send as download
+        res.download(filePath, "income_details.csv", (err) => {
+            if (err) {
+                console.error("Download error:", err);
+                res.status(500).json({ message: "Download failed" });
+            } else {
+                fs.unlinkSync(filePath); // optional cleanup
+            }
+        });
     } catch (err) {
+        console.error("Server error:", err);
         res.status(500).json({ message: "Server Error!" });
     }
 };
+
 
 
 // delete income source

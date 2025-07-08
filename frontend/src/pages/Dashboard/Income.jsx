@@ -111,8 +111,8 @@ const Income = () => {
             const url = window.URL.createObjectURL(new Blob([response.date]));
             const link = document.createElement("a");
             link.href = url;
-            // download error sirana vicharych ahe
-            link.setAttribute("download", "income_details.xlsx");
+           
+            link.setAttribute("download", "income_details.csv");
             document.body.appendChild(link);
             link.click();
             link.parentNode.removeChild(link);

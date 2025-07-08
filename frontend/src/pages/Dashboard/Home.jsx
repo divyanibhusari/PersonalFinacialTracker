@@ -31,9 +31,11 @@ const Home = () => {
 
             );
             if (response.data) {
+                console.log("✅ Dashboard Data:", response.data);
                 setDashaboardData(response.data);
 
             }
+            console.log(response)
         } catch (err) {
             console.log("Something went wrong . please try again .", err)
         } finally {
@@ -45,6 +47,8 @@ const Home = () => {
         fetchDashboardData();
         return () => { };
     }, []);
+
+    
     return (
 
         <DashboardLayout activename="Dashboard">
@@ -76,10 +80,10 @@ const Home = () => {
                         onSeeMore={() => navigate("/expense")}
                     />
 
-                    <FinacialOverview 
-                    totalBalance = {dashboardData?.totalBalance || 0}
-                    totalIncome = {dashboardData?.totalIncome || 0}
-                    totalExpense = {dashboardData?.totalExpense || 0}
+                    <FinacialOverview
+                        totalBalance={dashboardData?.totalBalance || 0}
+                        totalIncome={dashboardData?.totalIncome || 0}
+                        totalExpense={dashboardData?.totalExpense || 0}
                     />
 
                     <ExpenseTransaction
@@ -87,21 +91,19 @@ const Home = () => {
                         onSeeMore={() => navigate("/expense")}
                     />
 
-                    <Last30DaysExpenses 
-                    data={dashboardData?.last30DaysExpenses?.transaction || []}
+                    <Last30DaysExpenses
+                        data={dashboardData?.last30DaysExpenses?.transactions || []}
                     />
-
-                
-
 
                     <RecentIncomeWithChart
-                        data={dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []}
-                        totalIncome={dashboardData?.last60DaysIncome?.totalIncome || 0}
+                        data={dashboardData?.last60DaysIncomes?.transactions || []}
+                        totalIncome={dashboardData?.last60DaysIncomes?.totalIncome || 0}
+                        
                     />
-
-                    <RecentIncome 
-                    transactions={dashboardData?.last60DaysIncome?.transactions || [] }
-                    onSeeMore={()=> navigate("/income")}
+                    
+                    <RecentIncome
+                        transactions={dashboardData?.last60DaysIncomes?.transactions || []}
+                        onSeeMore={() => navigate("/income")}
                     />
 
                 </div>

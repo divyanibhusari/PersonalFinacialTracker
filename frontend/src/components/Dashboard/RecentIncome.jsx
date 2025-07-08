@@ -16,11 +16,11 @@ const RecentIncome = ({ transactions, onSeeMore }) => {
 
 
             </div>
-            {chartData.length > 0 ? (
+            {/* {chartData.length > 0 ? (
                 <CustomBarChart data={chartData} />
             ) : (
                 <p className="text-gray-500 mt-4">No data to display</p>
-            )}
+            )} */}
 
             <div className="mt-6">
                 {transactions?.slice(0, 5)?.map((item) => {
@@ -29,7 +29,7 @@ const RecentIncome = ({ transactions, onSeeMore }) => {
                         key={item._id}
                         title={item.source}
                         icon={item.icon}
-                        date={moment(item.date).format("DO MMM YYYY")}
+                        date={moment(item.date).format("Do MMM YYYY")}
                         amount={item.amount}
                         type="income"
                         hideDeleteBtn

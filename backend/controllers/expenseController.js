@@ -1,4 +1,4 @@
-import xlsx from "xlsx";
+// import csv from "csv";
 import Expense from "../models/Expense.js";
 
 // add expense source
@@ -66,15 +66,15 @@ let downloadExpenseExcel = async (req, res) => {
         // Prepare date for each 
         const data = expense.map((item) => ({
             category: item.category,
-            Amount: item.account,
+            Amount: item.amount,
             Date: item.Date,
         }));
 
-        const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(data);
-        xlsx.utils.book_append_sheet(wb, ws, "Expense");
-        xlsx.writeFile(wb, 'expense_details.xlsx');
-        res.download('expense_details.xlsx');
+        const wb = csv.utils.book_new();
+        const ws = csv.utils.json_to_sheet(data);
+        csv.utils.book_append_sheet(wb, ws, "Expense");
+        csv.writeFile(wb, 'expense_details.csv');
+        res.download('expense_details.csv');
 
     } catch (err) {
         res.status(500).json({ message: "Server Error!" });
