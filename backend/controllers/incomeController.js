@@ -1,4 +1,4 @@
-import XLSX from "xlsx";
+import * as XLSX from "xlsx";
 import path from "path";
 import fs from "fs";
 import Income from "../models/Income.js";
@@ -41,20 +41,19 @@ let getAllIncome = async (req, res) => {
     }
 };
 // download income Excel file 
-
 let downloadIncomeExcel = async (req, res) => {
     const userId = req.user.id;
 
     try {
         const income = await Income.find({ userId }).sort({ date: -1 });
-
+        // console.log(income)
         const data = income.map((item) => ({
             Source: item.source || "",
             Amount: item.amount || 0,
             Date: item.date ? new Date(item.date).toLocaleDateString() : "",
         }));
         console.log("Formatted CSV data:", data); // ✅ DEBUG
-        
+
         const ws = XLSX.utils.json_to_sheet(data);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Income");
@@ -69,7 +68,7 @@ let downloadIncomeExcel = async (req, res) => {
 
         // ✅ Write the file
         XLSX.writeFile(wb, filePath, { bookType: "csv" });
-
+        // console.log("✅ File written at:", filePath);
         // ✅ Send as download
         res.download(filePath, "income_details.csv", (err) => {
             if (err) {
@@ -84,8 +83,6 @@ let downloadIncomeExcel = async (req, res) => {
         res.status(500).json({ message: "Server Error!" });
     }
 };
-
-
 
 // delete income source
 

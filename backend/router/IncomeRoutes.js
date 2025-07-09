@@ -1,6 +1,6 @@
 import express from "express"
 
-import { addIncome, getAllIncome, deleteIncome, downloadIncomeExcel } from "../controllers/incomeController.js";
+import { addIncome, getAllIncome, downloadIncomeExcel, deleteIncome } from "../controllers/incomeController.js";
 
 import protect from "../middleware/authMiddleware.js"
 

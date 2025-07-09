@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import IncomeList from "../../components/Income/IncomeList";
 import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
+import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
 const Income = () => {
     useUserAuth();
     const [incomeData, setIncomeData] = useState([]);
@@ -108,7 +109,7 @@ const Income = () => {
             );
 
             // Create a url for the blob
-            const url = window.URL.createObjectURL(new Blob([response.date]));
+            const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
            

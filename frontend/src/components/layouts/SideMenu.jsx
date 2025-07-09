@@ -19,7 +19,7 @@ const SideMenu = ({ activeMenu }) => {
     };
 
     const handleLogout = () => {
-        localStorage.clear();
+        localStorage.removeItem('686e57c1c2492938c9e18005');
         clearUser();
         navigate("/login");
     };

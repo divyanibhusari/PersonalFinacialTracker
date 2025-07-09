@@ -5,11 +5,6 @@ import { prepareExpenseBarChartData } from '../../utils/helper.js';
 const Last30DaysExpenses = ({ data }) => {
   const [chartData, setChartData] = useState([]);
 
-  // useEffect(() => {
-  //   if (data && data.length > 0) {
-  //     const result = prepareExpenseBarChartData(data);
-  //     setChartData(result);
-  //   }
   useEffect(() => {
     // console.log("Incoming data:", data); // check what you're receiving
     if (data && data.length > 0) {

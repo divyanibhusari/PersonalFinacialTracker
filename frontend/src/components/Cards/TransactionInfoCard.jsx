@@ -14,7 +14,7 @@ const TransactionInfoCard = ({
     const isIncome = lowerType === 'income';
 
     // Log for debugging
-    console.log("Transaction:", { type, isIncome, amount });
+    // console.log("Transaction:", { type, isIncome, amount });
 
     const getAmountStyles = () =>
         isIncome ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600";

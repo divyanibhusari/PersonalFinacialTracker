@@ -16,11 +16,7 @@ const RecentIncome = ({ transactions, onSeeMore }) => {
 
 
             </div>
-            {/* {chartData.length > 0 ? (
-                <CustomBarChart data={chartData} />
-            ) : (
-                <p className="text-gray-500 mt-4">No data to display</p>
-            )} */}
+          
 
             <div className="mt-6">
                 {transactions?.slice(0, 5)?.map((item) => {

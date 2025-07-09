@@ -44,6 +44,7 @@ export const addThousandsSeparator = (num) => {
 
 export const prepareExpenseBarChartData = (data = []) => {
     const chartData = data.map((item) => ({
+        
         category: item?.category,
         amount: item?.amount,
         month: moment(item?.date).format("Do MMM"), // e.g., "Jul 8"
