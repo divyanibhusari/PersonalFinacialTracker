@@ -12,16 +12,13 @@ const SideMenu = ({ activeMenu }) => {
 
     const handleClick = (route) => {
         if (route === "logout") {
-            handleLogout();
-            return;
+           localStorage.removeItem('authToken');
+            clearUser();
+            navigate("/login");
+            alert("logout succefully")
+        } else {
+            navigate(route);
         }
-        navigate(route);
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('686e57c1c2492938c9e18005');
-        clearUser();
-        navigate("/login");
     };
     return <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-grey-200/50 p-5 sticky top-[61px] z-20">
         <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-2">
