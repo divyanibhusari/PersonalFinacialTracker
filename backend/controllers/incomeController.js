@@ -4,7 +4,6 @@ import fs from "fs";
 import Income from "../models/Income.js";
 
 // add income source
-
 let addIncome = async (req, res) => {
     const userId = req.user.id;
     try {
@@ -58,7 +57,7 @@ let downloadIncomeExcel = async (req, res) => {
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Income");
 
-        // ✅ Ensure public folder exists
+        // Ensure public folder exists
         const publicDir = path.join(path.resolve(), "public");
         if (!fs.existsSync(publicDir)) {
             fs.mkdirSync(publicDir);
@@ -66,10 +65,10 @@ let downloadIncomeExcel = async (req, res) => {
 
         const filePath = path.join(publicDir, "income_details.csv");
 
-        // ✅ Write the file
+        // Write the file
         XLSX.writeFile(wb, filePath, { bookType: "csv" });
-        // console.log("✅ File written at:", filePath);
-        // ✅ Send as download
+        // console.log("File written at:", filePath);
+        // Send as download
         res.download(filePath, "income_details.csv", (err) => {
             if (err) {
                 console.error("Download error:", err);
