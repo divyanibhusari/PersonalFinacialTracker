@@ -50,7 +50,7 @@ let getDashboardData = async (req, res) => {
       ...lastIncome.map((txn) => ({
         ...txn.toObject(),
         type: "Income",
-        date: txn.date, // 👈 ensures consistency for frontend
+        date: txn.date, //  ensures consistency for frontend
       })),
       ...lastExpense.map((txn) => ({
         ...txn.toObject(),
@@ -59,11 +59,11 @@ let getDashboardData = async (req, res) => {
       })),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // ✅ Add lowercase `date` to each income/expense transaction
+    //  Add lowercase `date` to each income/expense transaction
     const formatTransactionsWithDate = (transactions) =>
       transactions.map((txn) => ({
         ...txn.toObject(),
-        date: txn.Date, // 👈 add this lowercase field
+        date: txn.Date, //  add this lowercase field
       }));
 
     res.json({
