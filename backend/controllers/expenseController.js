@@ -53,13 +53,13 @@ let downloadExpenseExcel = async (req, res) => {
             Amount: item.amount || 0,
             Date: item.Date ? new Date(item.Date).toLocaleDateString() : "",
         }));
-        console.log("Formatted CSV data:", data); // ✅ DEBUG
+        console.log("Formatted CSV data:", data); // DEBUG
 
         const ws = XLSX.utils.json_to_sheet(data);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Expense");
 
-        // ✅ Ensure public folder exists
+        // Ensure public folder exists
         const publicDir = path.join(path.resolve(), "public");
         if (!fs.existsSync(publicDir)) {
             fs.mkdirSync(publicDir);
@@ -67,10 +67,10 @@ let downloadExpenseExcel = async (req, res) => {
 
         const filePath = path.join(publicDir, "expense_details.csv");
 
-        // ✅ Write the file
+        // Write the file
         XLSX.writeFile(wb, filePath, { bookType: "csv" });
-        // console.log("✅ File written at:", filePath);
-        // ✅ Send as download
+        // console.log("File written at:", filePath);
+        // Send as download
         res.download(filePath, "expense_details.csv", (err) => {
             if (err) {
                 console.error("Download error:", err);
