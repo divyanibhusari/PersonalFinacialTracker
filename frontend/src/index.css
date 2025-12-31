@@ -1,6 +1,5 @@
-@import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+@import "tailwindcss";
 
 @layer base {
   html {
@@ -27,7 +26,7 @@
   animation: shine 1.5s ease-in-out;
 }
 
-/* Custom components using @apply (still supported in v4) */
+/* Custom components */
 .input-box {
   @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-1 mb-3 mt-3 border border-slate-200 outline-none;
 }
@@ -49,5 +48,5 @@
 }
 
 .add-btn-fill {
-  @apply text-white bg-primary;
+  @apply text-white ;
 }
